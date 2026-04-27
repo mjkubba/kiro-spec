@@ -1,39 +1,42 @@
-# Kiro Steering Files
+# Kiro Spec
 
-Steering files for [Kiro](https://kiro.dev) IDE and CLI — reusable prompts that guide AI agent behavior across projects.
+Reusable steering files for [Kiro](https://kiro.dev) CLI — spec-driven development workflow prompts reverse-engineered from Kiro IDE.
 
-## Structure
+## Files
 
-```
-├── global/                  # Machine-wide steering → ~/.kiro/steering/
-│   ├── spec-workflow.md     # Spec-driven development workflow (req → design → tasks)
-│   └── spec-creation-guide.md  # Step-by-step guide for creating specs
-└── edi/                     # EDI parser project steering → edi/.kiro/steering/
-    ├── implementation-rules.md  # Rust coding rules, X12 parsing rules, git practices
-    ├── project-specification.md # Project architecture and patterns
-    └── test-guidelines.md       # Testing methodology and demo file locations
-```
+| File | Purpose |
+|------|---------|
+| `global/spec-workflow.md` | Full spec workflow reference: 3-phase process (requirements → design → tasks), templates, task format, bugfix methodology, session handling |
+| `global/spec-creation-guide.md` | Step-by-step guide for creating specs from scratch with templates and quality rules |
 
 ## Installation
 
-### Global (all projects)
 ```bash
 cp global/*.md ~/.kiro/steering/
 ```
 
-### EDI project
-```bash
-cp edi/*.md /path/to/edi/.kiro/steering/
+## What does this do?
+
+These steering files teach the Kiro CLI agent how to do structured spec-driven development — the same workflow that Kiro IDE uses with its built-in spec feature:
+
+1. **Requirements** — User stories + acceptance criteria using EARS syntax
+2. **Design** — Architecture, correctness properties, error handling, testing strategy
+3. **Tasks** — Ordered implementation plan with checkboxes and requirement traceability
+
+Supports feature specs (requirements-first or design-first) and bugfix specs (bug condition methodology).
+
+## Usage
+
+Once installed, ask the CLI agent to create a spec:
+
+```
+> create a spec for user authentication
+> spec out a caching layer
+> plan the API redesign
 ```
 
-## What are steering files?
+The agent will follow the workflow, creating `requirements.md` → `design.md` → `tasks.md` under `.kiro/specs/{feature-name}/`.
 
-Steering files provide persistent context and instructions to the Kiro AI agent. They're markdown files with front-matter controlling when they're included:
+## Steering file inclusion
 
-- `inclusion: always` — Included in every interaction (default)
-- `inclusion: manual` — Only when explicitly referenced
-- `inclusion: fileMatch` + `fileMatchPattern: 'README*'` — When matching files are read
-
-## Origin
-
-The spec workflow files were reverse-engineered from Kiro IDE's spec creation system prompts to make the same capability available in the Kiro CLI.
+Both files use `inclusion: manual` front-matter — they're loaded into the knowledge base but don't bloat every conversation. The agent finds them via semantic search when spec-related requests come in.
