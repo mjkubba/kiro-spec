@@ -1,5 +1,8 @@
 # Kiro Spec
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Made for Kiro CLI](https://img.shields.io/badge/Made%20for-Kiro%20CLI-blue)](https://kiro.dev)
+
 Reusable steering files for [Kiro](https://kiro.dev) CLI — spec-driven development workflow prompts reverse-engineered from Kiro IDE.
 
 ## Files
@@ -40,3 +43,15 @@ The agent will follow the workflow, creating `requirements.md` → `design.md` �
 ## Steering file inclusion
 
 Both files use `inclusion: manual` front-matter — they're loaded into the knowledge base but don't bloat every conversation. The agent finds them via semantic search when spec-related requests come in.
+
+## Compatibility
+
+Tested with Kiro CLI. The steering files follow the standard `.kiro/steering/` convention and should work with any version that supports steering file loading.
+
+## Contributing
+
+Issues and PRs are welcome! If you have improvements to the workflow templates or want to add new steering files, feel free to open a PR.
+
+## License
+
+[MIT](LICENSE)
